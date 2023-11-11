@@ -49,6 +49,7 @@ resource "openstack_lb_member_v2" "this" {
       }
     ]
   ]) : m.name => m }
+  name          = each.key
   pool_id       = openstack_lb_pool_v2.this[each.value.pool].id
   protocol_port = openstack_lb_listener_v2.this[each.value.listener].protocol_port
   address       = each.value.address
