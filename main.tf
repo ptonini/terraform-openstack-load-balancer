@@ -14,6 +14,7 @@ resource "openstack_networking_floatingip_associate_v2" "this" {
 
 resource "openstack_lb_listener_v2" "this" {
   for_each        = var.listeners
+  name            = each.key
   protocol        = each.value.protocol
   protocol_port   = each.value.protocol_port
   loadbalancer_id = openstack_lb_loadbalancer_v2.this.id
@@ -21,6 +22,7 @@ resource "openstack_lb_listener_v2" "this" {
 
 resource "openstack_lb_pool_v2" "this" {
   for_each    = var.pools
+  name        = each.key
   protocol    = each.value.protocol
   lb_method   = each.value.lb_method
   listener_id = openstack_lb_listener_v2.this[each.value.listener].id
@@ -29,6 +31,7 @@ resource "openstack_lb_pool_v2" "this" {
 resource "openstack_lb_monitor_v2" "ebt_lb0001_monitor_1" {
   for_each    = var.pools
   pool_id     = openstack_lb_pool_v2.this[each.key].id
+  name        = each.key
   type        = each.value.monitor.type
   delay       = each.value.monitor.delay
   timeout     = each.value.monitor.timeout
