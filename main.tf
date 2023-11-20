@@ -54,4 +54,3 @@ resource "openstack_lb_member_v2" "this" {
   protocol_port = openstack_lb_listener_v2.this[each.value.listener].protocol_port
   address       = each.value.address
 }
-
