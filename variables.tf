@@ -2,6 +2,10 @@ variable "name" {}
 
 variable "vip_subnet_id" {}
 
+variable "flavor_id" {
+  default = null
+}
+
 variable "public_network_name" {}
 
 variable "listeners" {

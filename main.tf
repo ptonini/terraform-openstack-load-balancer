@@ -1,6 +1,7 @@
 resource "openstack_lb_loadbalancer_v2" "this" {
   name          = var.name
   vip_subnet_id = var.vip_subnet_id
+  flavor_id     = var.flavor_id
 }
 
 resource "openstack_networking_floatingip_v2" "this" {
